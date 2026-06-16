@@ -10,13 +10,11 @@ import requests
 from PySide6.QtWidgets import QApplication, QWidget, QTableWidgetItem
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import *
-
-# 原有 UI 文件（基于 PySide2 生成，通常兼容）
 from mainwin import *
 from sqlwin import *
 
 # 新数据库文件名
-NEW_DB_FILE = "bbhj_under18.sql"
+NEW_DB_FILE = "bbhj_under18.sql" #未成年失踪数据库
 conn = None
 c = None
 
