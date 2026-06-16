@@ -12,7 +12,6 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
-# 设置 matplotlib 全局样式
 plt.style.use('seaborn-v0_8-ticks')
 plt.rcParams['font.sans-serif'] = ['Songti SC']
 plt.rcParams['axes.unicode_minus'] = False
@@ -24,7 +23,7 @@ plt.rcParams['legend.fontsize'] = 9
 DB_PATH = "bbhj_under18.sql"
 TABLE_NAME = "宝贝回家未成年"
 
-# ===================== 省份提取与标准化 =====================
+# 省份提取与标准化
 STANDARD_PROVINCES = [
     '北京', '天津', '上海', '重庆', '河北', '山西', '辽宁', '吉林', '黑龙江',
     '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南',
@@ -51,7 +50,6 @@ PROVINCE_ALIAS = {
     '内蒙古': '内蒙古', '广西': '广西', '西藏': '西藏', '宁夏': '宁夏', '新疆': '新疆',
     '香港': '香港', '澳门': '澳门'
 }
-
 def extract_province(addr):
     if pd.isna(addr) or not isinstance(addr, str):
         return None
@@ -64,7 +62,7 @@ def extract_province(addr):
             return PROVINCE_ALIAS[alias]
     return None
 
-# ===================== 分类关键词 =====================
+# 分类关键词
 RUNAWAY_KEYWORDS = [
     '离家出走', '离家', '出走', '厌学', '赌气', '见网友', '打工', '不想回家',
     '争吵', '负气', '跑', '赌气离家', '负气出走', '与家人争吵', '赌气出走',
@@ -110,7 +108,7 @@ def classify_subtype(row):
             return '走失'
     for kw in ABANDON_KEYWORDS:
         if kw.lower() in lower_text:
-            return '送养遗弃'   # 修改：去掉斜杠
+            return '送养遗弃'
     return '未分类'
 
 def load_and_clean():
@@ -193,7 +191,7 @@ def load_and_clean():
 
     return df
 
-# ===================== 图表函数 =====================
+# 图表函数
 def add_source_note(fig, text="数据来源：宝贝回家网", x=0.99, y=0.01):
     fig.text(x, y, text, fontsize=8, ha='right', va='bottom', style='italic',
              transform=fig.transFigure, bbox=dict(boxstyle='round', facecolor='white', alpha=0.6))
